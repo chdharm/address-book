@@ -3,6 +3,7 @@ from django.conf import settings
 from rest_framework import status
 from rest_framework.response import Response
 
+
 def token_required(func):
     def _inner(request, *args, **kwargs):
         try:
@@ -15,4 +16,5 @@ def token_required(func):
         except:
             print(traceback.format_exc())
             return Response({'msg': 'INVALID_TOKEN'}, status=status.HTTP_403_FORBIDDEN)
+
     return _inner
