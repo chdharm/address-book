@@ -10,6 +10,6 @@
 
 Todos:
 
-1. Add unit and integration test cases.
+1. Add more unit test cases and integration test cases.
 2. Add created and updated date for every model.
 3. Input Validation using forms/serializer. 
