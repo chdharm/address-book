@@ -9,7 +9,7 @@
 
 
 Todos:
-0. Input Validation using form or serializer
+0. Input Validation using form or serializer and token validation for request using decorator
 1. Better error handling.
 2. Support pagination
 3. Better db indexes when this is scaling.

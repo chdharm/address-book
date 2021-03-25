@@ -1,6 +1,8 @@
+import traceback
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from api.models import Person, Address, Email, Mobile
 
 
 @api_view(['POST'])
@@ -11,10 +13,38 @@ def add_person(request):
     into the database.
 
     """
+    try:
+        request_data = request.data
 
-    request_data = request.data
+        name = request_data.get("name")
+        mobile = request_data.get("mobile")
+        email = request_data.get("email")
+        address = request_data.get("address")
 
-    pass
+        person = Person.objects.create(name=name)
+
+        if mobile:
+            Mobile.objects.create(
+                mobile=mobile,
+                person_id=person.id
+            )
+        if email:
+            Email.objects.create(
+                email=email,
+                person_id=person.id
+            )
+        if address:
+            Address.objects.create(
+                address=address,
+                person_id=person.id
+            )
+        #Add a serializer for the the person data
+        return Response(person, status=status.HTTP_201_CREATED)
+    except:
+        print(traceback.format_exc())
+        return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
 
 
 @api_view(['GET'])
@@ -25,7 +55,7 @@ def address_book(request):
     We will paginate this for 10 items at a time.
 
     """
-
+    
     
     pass
 
