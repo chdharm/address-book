@@ -4,9 +4,11 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from api.models import Person, Address, Email, Mobile
 from api.serializers.v1.addressbook import PersonDetailSerializer
+from api.auth.securetoken import token_required
 
 
 @api_view(['POST'])
+@token_required
 def add_person(request):
     """
     This end point will take the person 
@@ -47,6 +49,7 @@ def add_person(request):
 
 
 @api_view(['GET'])
+@token_required
 def address_book(request):
     """
     This Endpoint is for getting contact 
@@ -64,6 +67,7 @@ def address_book(request):
 
 
 @api_view(['GET'])
+@token_required
 def search_person(request):
     """
     This Endpoint is for searching contact 
@@ -94,6 +98,7 @@ def search_person(request):
 
 
 @api_view(['DELETE'])
+@token_required
 def delete(request, pk):
     """
     This Endpoint will delete 
@@ -110,6 +115,7 @@ def delete(request, pk):
 
 
 @api_view(['POST'])
+@token_required
 def edit(request, pk):
     """
     This Endpoint will edit the person 
@@ -149,6 +155,7 @@ def edit(request, pk):
 
 
 @api_view(['PUT'])
+@token_required
 def add_mobile(request, pk):
     """
     This Endpoint will add the mobile number 
@@ -175,6 +182,7 @@ def add_mobile(request, pk):
 
 
 @api_view(['PUT'])
+@token_required
 def add_email(request, pk):
     """
     This Endpoint will add the email id into 
@@ -201,6 +209,7 @@ def add_email(request, pk):
 
 
 @api_view(['PUT'])
+@token_required
 def add_address(request, pk):
     """
     This Endpoint will add the address into 
