@@ -2,9 +2,10 @@ import traceback
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from api.models import Person, Address, Email, Mobile
-from api.serializers.v1.addressbook import PersonDetailSerializer
 from api.auth.securetoken import token_required
+from api.models import Person, Address, Email, Mobile
+from rest_framework.pagination import PageNumberPagination
+from api.serializers.v1.addressbook import PersonDetailSerializer
 
 
 @api_view(['POST'])
@@ -58,8 +59,11 @@ def address_book(request):
 
     """
     try:
+        paginator = PageNumberPagination()
+        paginator.page_size = 10
         persons = Person.objects.all()
-        serializer = PersonDetailSerializer(persons, many=True)
+        paginated_persons = paginator.paginate_queryset(persons, request)
+        serializer = PersonDetailSerializer(paginated_persons, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     except:
         print(traceback.format_exc())
@@ -79,6 +83,8 @@ def search_person(request):
 
     try:
         persons = None
+        paginator = PageNumberPagination()
+        paginator.page_size = 10
         name = request.GET.get("name")
         email = request.GET.get("email")
         if name and email:
@@ -89,7 +95,8 @@ def search_person(request):
             persons = Person.objects.filter(email__email__icontains=email)
         else:
             persons = Person.objects.all()
-        serializer = PersonDetailSerializer(persons, many=True)
+        paginated_persons = paginator.paginate_queryset(persons, request)
+        serializer = PersonDetailSerializer(paginated_persons, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     except:
         print(traceback.format_exc())
