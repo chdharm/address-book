@@ -1,0 +1,23 @@
+# Environment
+env/
+#Compiled Files
+
+# Git Files
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# Django stuff:
+*.log
+
+## Directory-based project format:
+.idea/
+
+#Hiding pyc files
+*.pyc
+
+#VS Code files
+.vscode/
+
+#Migrations
