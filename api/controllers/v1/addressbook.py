@@ -3,6 +3,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from api.models import Person, Address, Email, Mobile
+from api.serializers.v1.addressbook import PersonDetailSerializer
 
 
 @api_view(['POST'])
@@ -38,8 +39,8 @@ def add_person(request):
                 address=address,
                 person_id=person.id
             )
-        #Add a serializer for the the person data
-        return Response(person, status=status.HTTP_201_CREATED)
+        serializer = PersonDetailSerializer(person)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
     except:
         print(traceback.format_exc())
         return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -55,7 +56,7 @@ def address_book(request):
     We will paginate this for 10 items at a time.
 
     """
-    
+
     
     pass
 
