@@ -46,8 +46,6 @@ def add_person(request):
         return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-
-
 @api_view(['GET'])
 def address_book(request):
     """
@@ -56,9 +54,14 @@ def address_book(request):
     We will paginate this for 10 items at a time.
 
     """
+    try:
+        persons = Person.objects.all()
+        serializer = PersonDetailSerializer(persons, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    except:
+        print(traceback.format_exc())
+        return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-    
-    pass
 
 @api_view(['GET'])
 def search_person(request):
@@ -86,6 +89,7 @@ def delete(request):
     request_data = request.data
     pass
 
+
 @api_view(['POST'])
 def edit(request):
     """
@@ -111,6 +115,7 @@ def add_mobile(request):
     request_data = request.data
     pass
 
+
 @api_view(['PUT'])
 def add_email(request):
     """
@@ -122,6 +127,7 @@ def add_email(request):
 
     request_data = request.data
     pass
+
 
 @api_view(['PUT'])
 def add_address(request):
