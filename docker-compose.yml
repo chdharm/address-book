@@ -1,0 +1,18 @@
+version: '2.0'
+services:
+
+  contact_book:
+    image: chdharm/contactbook:latest
+    command: bash -c "gunicorn contact_book.wsgi -b 0.0.0.0:20000 --workers 1 --limit-request-line 4094 --limit-request-fields 100 --timeout 300 --log-level debug"
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "170m"
+        max-file: "5"
+    env_file:
+      - ./.env
+    expose:
+      - "20000"
+    ports:
+      - 20000:20000
