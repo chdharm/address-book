@@ -1,8 +1,9 @@
 from django.urls import path, re_path
 from api.views.v1 import views
-from api.controllers.v1.addressbook import add_person, address_book, search_person, delete, edit, add_mobile, add_email, add_address
+from api.controllers.v1.addressbook import add_person, address_book, search_person, delete, edit, add_mobile, add_email, \
+    add_address
 
-urlpatterns =[
+urlpatterns = [
     path('health/', views.health, name='health'),
     path('health-secure/', views.health_secure, name='health_secure'),
     path('addPerson/', add_person, name='add_person'),

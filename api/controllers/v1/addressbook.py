@@ -101,7 +101,6 @@ def search_person(request):
     except:
         print(traceback.format_exc())
         return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-    
 
 
 @api_view(['DELETE'])
