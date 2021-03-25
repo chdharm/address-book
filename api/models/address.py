@@ -1,8 +1,6 @@
 from django.db import models
 from .person import Person
 
-class Email(models.Model):
+class Address(models.Model):
     person = models.ForeignKey(Person, editable=False, on_delete=models.CASCADE)
-    email = models.EmailField(blank=True,max_length=70, unique=True)
-
-
+    address = models.CharField(blank=True, null=True, max_length=100)
