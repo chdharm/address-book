@@ -46,8 +46,6 @@ def add_person(request):
         return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-
-
 @api_view(['GET'])
 def address_book(request):
     """
@@ -56,9 +54,14 @@ def address_book(request):
     We will paginate this for 10 items at a time.
 
     """
+    try:
+        persons = Person.objects.all()
+        serializer = PersonDetailSerializer(persons, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    except:
+        print(traceback.format_exc())
+        return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-    
-    pass
 
 @api_view(['GET'])
 def search_person(request):
@@ -70,24 +73,44 @@ def search_person(request):
 
     """
 
-    request.GET.get("analyst_id")
-    pass
+    try:
+        persons = None
+        name = request.GET.get("name")
+        email = request.GET.get("email")
+        if name and email:
+            persons = Person.objects.filter(name__icontains=name, email__email__icontains=email)
+        elif name:
+            persons = Person.objects.filter(name__icontains=name)
+        elif email:
+            persons = Person.objects.filter(email__email__icontains=email)
+        else:
+            persons = Person.objects.all()
+        serializer = PersonDetailSerializer(persons, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    except:
+        print(traceback.format_exc())
+        return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
 
 
 @api_view(['DELETE'])
-def delete(request):
+def delete(request, pk):
     """
     This Endpoint will delete 
     the person contact details. 
     It expects personId in URL param.
 
     """
+    try:
+        Person.objects.filter(id=pk).delete()
+        return Response(status=status.HTTP_200_OK)
+    except:
+        print(traceback.format_exc())
+        return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-    request_data = request.data
-    pass
 
 @api_view(['POST'])
-def edit(request):
+def edit(request, pk):
     """
     This Endpoint will edit the person 
     contact details. 
@@ -95,12 +118,38 @@ def edit(request):
 
     """
 
-    request_data = request.data
-    pass
+    try:
+        request_data = request.data
+        mobile = request_data.get("mobile")
+        email = request_data.get("email")
+        address = request_data.get("address")
+
+        person = Person.objects.filter(id=pk).last()
+
+        if mobile:
+            Mobile.objects.create(
+                mobile=mobile,
+                person_id=person.id
+            )
+        if email:
+            Email.objects.create(
+                email=email,
+                person_id=person.id
+            )
+        if address:
+            Address.objects.create(
+                address=address,
+                person_id=person.id
+            )
+        serializer = PersonDetailSerializer(person)
+        return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+    except:
+        print(traceback.format_exc())
+        return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 @api_view(['PUT'])
-def add_mobile(request):
+def add_mobile(request, pk):
     """
     This Endpoint will add the mobile number 
     into the person contact details. 
@@ -108,11 +157,25 @@ def add_mobile(request):
 
     """
 
-    request_data = request.data
-    pass
+    try:
+        request_data = request.data
+        mobile = request_data.get("mobile")
+
+        person = Person.objects.filter(id=pk).last()
+        if mobile:
+            Mobile.objects.create(
+                mobile=mobile,
+                person_id=person.id
+            )
+        serializer = PersonDetailSerializer(person)
+        return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+    except:
+        print(traceback.format_exc())
+        return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 
 @api_view(['PUT'])
-def add_email(request):
+def add_email(request, pk):
     """
     This Endpoint will add the email id into 
     the person contact details. 
@@ -120,11 +183,25 @@ def add_email(request):
 
     """
 
-    request_data = request.data
-    pass
+    try:
+        request_data = request.data
+        email = request_data.get("email")
+
+        person = Person.objects.filter(id=pk).last()
+        if email:
+            Email.objects.create(
+                email=email,
+                person_id=person.id
+            )
+        serializer = PersonDetailSerializer(person)
+        return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+    except:
+        print(traceback.format_exc())
+        return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 
 @api_view(['PUT'])
-def add_address(request):
+def add_address(request, pk):
     """
     This Endpoint will add the address into 
     the person contact details. 
@@ -132,5 +209,18 @@ def add_address(request):
 
     """
 
-    request_data = request.data
-    pass
+    try:
+        request_data = request.data
+        address = request_data.get("address")
+
+        person = Person.objects.filter(id=pk).last()
+        if address:
+            Address.objects.create(
+                address=address,
+                person_id=person.id
+            )
+        serializer = PersonDetailSerializer(person)
+        return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+    except:
+        print(traceback.format_exc())
+        return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)

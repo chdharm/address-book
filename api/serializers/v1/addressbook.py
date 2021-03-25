@@ -21,17 +21,17 @@ class PersonDetailSerializer(serializers.ModelSerializer):
     def get_email(self, person):
         email = Email.objects.filter(person__id=person.id).last()
         if email:
-            email.email
+            return email.email
         return None
 
     def get_mobile(self, person):
         mobile = Mobile.objects.filter(person__id=person.id).last()
         if mobile:
-            mobile.mobile
+            return mobile.mobile
         return None
     
     def get_address(self, person):
         address = Address.objects.filter(person__id=person.id).last()
         if address:
-            address.address
+            return address.address
         return None
