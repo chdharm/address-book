@@ -9,7 +9,8 @@
 
 
 Todos:
-
+0. Input Validation using form or serializer
 1. Better error handling.
-2. Dockerizing the project.
+2. Support pagination
 3. Better db indexes when this is scaling.
+4. Dockerizing the project.

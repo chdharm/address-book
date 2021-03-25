@@ -11,6 +11,9 @@ def add_person(request):
     into the database.
 
     """
+
+    request_data = request.data
+
     pass
 
 
@@ -22,6 +25,8 @@ def address_book(request):
     We will paginate this for 10 items at a time.
 
     """
+
+    
     pass
 
 @api_view(['GET'])
@@ -33,6 +38,8 @@ def search_person(request):
     We will paginate this for 10 items at a time.
 
     """
+
+    request.GET.get("analyst_id")
     pass
 
 
@@ -44,6 +51,8 @@ def delete(request):
     It expects personId in URL param.
 
     """
+
+    request_data = request.data
     pass
 
 @api_view(['POST'])
@@ -54,6 +63,8 @@ def edit(request):
     It expects personId in URL param.
 
     """
+
+    request_data = request.data
     pass
 
 
@@ -65,6 +76,8 @@ def add_mobile(request):
     It expects personId in URL param.
 
     """
+
+    request_data = request.data
     pass
 
 @api_view(['PUT'])
@@ -75,6 +88,8 @@ def add_email(request):
     It expects personId in URL param.
 
     """
+
+    request_data = request.data
     pass
 
 @api_view(['PUT'])
@@ -85,4 +100,6 @@ def add_address(request):
     It expects personId in URL param.
 
     """
+
+    request_data = request.data
     pass
