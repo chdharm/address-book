@@ -10,9 +10,8 @@
 
 Todos:
 
-0. Input Validation using form or serializer.
-1. Better error handling. Add created and updated date for every models.
-2. Support pagination.
+1. Input Validation using form or serializer.
+2. Add created and updated date for every models.
 3. Better db indexes when this is scaling.
 4. Dockerizing the project.
 5. Add unit and integration test cases.
