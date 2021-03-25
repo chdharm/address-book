@@ -14,7 +14,7 @@ def add_person(request):
     pass
 
 
-@api_view(['POST'])
+@api_view(['GET'])
 def search_person(request):
     """
     This Endpoint is for searching contact 
@@ -25,7 +25,7 @@ def search_person(request):
     pass
 
 
-@api_view(['POST'])
+@api_view(['DELETE'])
 def delete(request):
     """
     This Endpoint will delete 
@@ -46,7 +46,7 @@ def edit(request):
     pass
 
 
-@api_view(['POST'])
+@api_view(['PUT'])
 def add_mobile(request):
     """
     This Endpoint will add the mobile number 
@@ -56,7 +56,7 @@ def add_mobile(request):
     """
     pass
 
-@api_view(['POST'])
+@api_view(['PUT'])
 def add_email(request):
     """
     This Endpoint will add the email id into 
@@ -66,7 +66,7 @@ def add_email(request):
     """
     pass
 
-@api_view(['POST'])
+@api_view(['PUT'])
 def add_address(request):
     """
     This Endpoint will add the address into 
