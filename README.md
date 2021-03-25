@@ -1,6 +1,6 @@
 * Clone the repo
 
-* Change the directory to route
+* Change the directory to main folder
 
 * Create required vitual environment if you want or else run requirements.txt for dependecy
 
