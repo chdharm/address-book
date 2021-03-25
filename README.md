@@ -15,3 +15,4 @@ Todos:
 2. Support pagination. In search api we can provide feature to do substring search.
 3. Better db indexes when this is scaling.
 4. Dockerizing the project.
+5. Add unit and integration test cases.
