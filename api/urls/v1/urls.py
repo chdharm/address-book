@@ -4,6 +4,7 @@ from api.controllers.v1.addressbook import add_person, address_book, search_pers
 
 urlpatterns =[
     path('health/', views.health, name='health'),
+    path('health-secure/', views.health_secure, name='health_secure'),
     path('addPerson/', add_person, name='add_person'),
     path('addressBook/', address_book, name='address_book'),
     path('searchPerson/', search_person, name='search_person'),
