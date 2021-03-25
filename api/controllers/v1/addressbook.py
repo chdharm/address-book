@@ -15,11 +15,22 @@ def add_person(request):
 
 
 @api_view(['GET'])
+def address_book(request):
+    """
+    This Endpoint is for getting contact 
+    details of all people at a time.
+    We will paginate this for 10 items at a time.
+
+    """
+    pass
+
+@api_view(['GET'])
 def search_person(request):
     """
     This Endpoint is for searching contact 
     details of a person based on their 
-    email id or name.
+    email id or name. 
+    We will paginate this for 10 items at a time.
 
     """
     pass
